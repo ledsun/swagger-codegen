@@ -8,15 +8,29 @@ class {{classname}} < ApplicationController
 {{#isRestfulIndex}}
   def index
     # Your code here
-
-    render json: {"message" => "yes, it worked"}
+    {{^examples}}
+    result = {"message" => "yes, it worked"}
+    {{/examples}}
+    {{#examples}}
+    result = JSON.parse <<-EOF
+      {{{example}}}
+    EOF
+    {{/examples}}
+    render json: result
   end
 {{/isRestfulIndex}}
 {{#isRestfulShow}}
   def show
     # Your code here
-
-    render json: {"message" => "yes, it worked"}
+    {{^examples}}
+    result = {"message" => "yes, it worked"}
+    {{/examples}}
+    {{#examples}}
+    result = JSON.parse <<-EOF
+      {{{example}}}
+    EOF
+    {{/examples}}
+    render json: result
   end
 {{/isRestfulShow}}
 {{#isRestfulCreate}}
